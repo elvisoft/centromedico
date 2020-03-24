@@ -4,15 +4,17 @@ if(!isset($_SESSION['usuario'])){
 }
 
 if($_SERVER['REQUEST_METHOD']=='POST'){
-	$fecha = $_POST['fecha'];
-	$hora = $_POST['hora'];
-	$paciente =  $_POST['paciente'];
-	$medico =  $_POST['medico'];
-	$consultorio =  $_POST['consultorio'];
-	$estado =  $_POST['estado'];
-	$observaciones =  $_POST['observaciones'];
+
+	$citfecha = $_POST['citfecha'];
+	$cithora = $_POST['cithora'];
+	$citPaciente =  $_POST['citPaciente'];
+	$citMedico =  $_POST['citMedico'];
+	$citConsultorio =  $_POST['citConsultorio'];
+	$citestado =  $_POST['citestado'];
+	$citobservaciones =  $_POST['citobservaciones'];
 	$mensaje='';
-	if(empty($fecha) or empty($hora)  or empty($consultorio) or empty($paciente) or empty($estado)or empty($medico)){
+
+	if(empty($citfecha) or empty($cithora)  or empty($citConsultorio) or empty($citPaciente) or empty($citestado)or empty($citMedico)){
 		$mensaje.= 'Por favor rellena todos los datos correctamente'."<br />";
 	}
 	else{	
@@ -25,17 +27,20 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 	}
 	if($mensaje==''){
 		$statement = $conexion->prepare(
-		'INSERT INTO citas values(null, :fecha,:hora,:paciente,:medico,:consultorio,:estado,:observaciones)');
+			'INSERT INTO citas values(null, :citfecha,:cithora,:citPaciente,:citMedico,:citConsultorio,:citestado,:citobservaciones)');
 
 		$statement ->execute(array(
-		':fecha'=>$fecha,
-		':hora'=>$hora,
-		':paciente'=>$paciente,
-		':medico'=>$medico,
-		':consultorio'=>$consultorio,
-		':estado'=>$estado,
-		':observaciones'=>$observaciones
+			':citfecha'=>$citfecha,
+			':cithora'=>$cithora,
+			':citPaciente'=>$citPaciente,
+			':citMedico'=>$citMedico,
+			':citConsultorio'=>$citConsultorio,
+			':citestado'=>$citestado,
+			':citobservaciones'=>$citobservaciones
 		));
+
+		#print_r($statement->errorInfo());exit;
+
 		header('Location: citas.php');
 	}
 }
