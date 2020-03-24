@@ -17,7 +17,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 	}
 	else{
 		try{
-			$conexion = new PDO('mysql:host=localhost;dbname=centromedico','root','2012116664');
+			$conexion = new PDO('mysql:host=localhost;dbname=centromedico','root','');
 		}catch(PDOException $e){
 			echo "ERROR: " . $e->getMessge();
 			die();
